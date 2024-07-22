@@ -13,6 +13,9 @@ return new class extends Migration
     {
         Schema::create('ingredientes', function (Blueprint $table) {
             $table->id();
+            $table->string('nombre');
+            $table->text('descripcion')->nullable();
+            $table->integer('cantidad');
             $table->timestamps();
         });
     }

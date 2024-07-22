@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\Factories\Factory;
  */
 class IngredientesFactory extends Factory
 {
+    protected $model = \App\Models\Ingredientes::class;
     /**
      * Define the model's default state.
      *
@@ -17,7 +18,9 @@ class IngredientesFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'nombre'=> $this->faker->word,
+            'descripcion'=> $this->faker->sentence,
+            'cantidad'=> $this-> faker->numberBetween(1, 100),
         ];
     }
 }
