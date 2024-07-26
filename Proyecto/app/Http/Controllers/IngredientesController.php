@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Ingregidentes;
 use Illuminate\Http\Request;
 
-class IngredienteController extends Controller
+class IngredientesController extends Controller
 {
         // Método para mostrar la lista de ingredientes
         public function index()
