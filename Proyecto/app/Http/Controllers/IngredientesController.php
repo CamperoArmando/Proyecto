@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Ingregidentes;
+use App\Models\Ingredientes;
 use Illuminate\Http\Request;
 
 class IngredientesController extends Controller
