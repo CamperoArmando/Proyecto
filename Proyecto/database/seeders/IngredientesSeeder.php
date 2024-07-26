@@ -13,6 +13,6 @@ class IngredientesSeeder extends Seeder
      */
     public function run(): void
     {
-        Ingredientes::observe(IngredientesObserver::class);
+        Ingredientes::factory()->count(50)->create();
     }
 }
