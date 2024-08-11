@@ -14,7 +14,7 @@ class IngredientesObserver
             $ingredientes->save();
 
             // Enviar la notificación
-            $ingredientes->notify(new IngredientesOutOfStock($ingredientes));
+            $ingredientes->notify(new IngredientesOutOfStock($ingredientes))
         }
     }
 }
