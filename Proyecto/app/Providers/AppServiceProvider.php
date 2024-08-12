@@ -1,25 +1,23 @@
 <?php
 
 namespace App\Providers;
-use App\Models\Ingredientes;
-use Illuminate\Support\ServiceProvider;
+
+use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
+use Illuminate\Support\Facades\Event;
 use App\Observers\IngredientesObserver;
+use App\Events\IngredienteAgotado;
+use App\Listeners\EnviarAlertaIngredienteAgotado;
 
 class AppServiceProvider extends ServiceProvider
 {
-    /**
-     * Register any application services.
-     */
-    public function register(): void
-    {
-        //
-    }
+    protected $listen = [
+        IngredienteAgotado::class => [
+            EnviarAlertaIngredienteAgotado::class,
+        ],
+    ];
 
-    /**
-     * Bootstrap any application services.
-     */
-    public function boot(): void
+    public function boot()
     {
-        Ingredientes::observe(IngredientesObserver::class);
+        parent::boot();
     }
 }
