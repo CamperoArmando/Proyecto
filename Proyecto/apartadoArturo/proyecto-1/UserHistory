@@ -1,0 +1,59 @@
+public class Pedido
+{
+    public int Id { get; set; }
+    public string Descripcion { get; set; }
+    public DateTime Fecha { get; set; }
+}
+
+using System;
+using System.Collections.Generic;
+using System.Windows.Forms;
+
+namespace EliminarPedidos
+{
+    public partial class Form1 : Form
+    {
+        private List<Pedido> pedidos;
+
+        public Form1()
+        {
+            InitializeComponent();
+            InitializeData();
+        }
+
+        private void InitializeData()
+        {
+            // Inicializa algunos pedidos de ejemplo
+            pedidos = new List<Pedido>
+            {
+                new Pedido { Id = 1, Descripcion = "Pedido 1", Fecha = DateTime.Now.AddDays(-1) },
+                new Pedido { Id = 2, Descripcion = "Pedido 2", Fecha = DateTime.Now.AddDays(-2) },
+                new Pedido { Id = 3, Descripcion = "Pedido 3", Fecha = DateTime.Now.AddDays(-3) }
+            };
+
+            // Configura el DataGridView
+            dataGridViewPedidos.DataSource = pedidos;
+        }
+
+        private void btnEliminar_Click(object sender, EventArgs e)
+        {
+            if (dataGridViewPedidos.SelectedRows.Count > 0)
+            {
+                // Obtener el ID del pedido seleccionado
+                int idPedidoSeleccionado = (int)dataGridViewPedidos.SelectedRows[0].Cells["Id"].Value;
+
+                // Eliminar el pedido de la lista
+                pedidos.RemoveAll(p => p.Id == idPedidoSeleccionado);
+
+                // Actualizar el DataGridView
+                dataGridViewPedidos.DataSource = null;
+                dataGridViewPedidos.DataSource = pedidos;
+            }
+            else
+            {
+                MessageBox.Show("Por favor, seleccione un pedido para eliminar.");
+            }
+        }
+    }
+}
+
