@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Lista de Platos</title>
+    <style>
+       /* Estilos Generales */
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f8f9fa;
+            color: #212529;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            width: 80%;
+            margin: auto;
+            padding: 20px;
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Encabezado */
+        h1 {
+            color: #343a40;
+            font-size: 2rem;
+            font-weight: bold;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        /* Tabla */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+
+        th, td {
+            border: 1px solid #dee2e6;
+            padding: 12px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f8f9fa;
+            color: #343a40;
+            font-weight: bold;
+        }
+
+        td {
+            background-color: #ffffff;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f8f9fa;
+        }
+
+        /* Botones */
+        .button {
+            display: inline-block;
+            padding: 8px 16px;
+            margin: 5px;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            text-decoration: none;
+            font-size: 14px;
+            text-align: center;
+            cursor: pointer;
+        }
+
+        .button.view {
+            background-color: #007bff;
+        }
+
+        .button.edit {
+            background-color: #17a2b8;
+        }
+
+        .button.delete {
+            background-color: #dc3545;
+        }
+
+        .button:hover {
+            opacity: 0.8;
+        }
+
+        /* Formularios */
+        form {
+            margin: 20px 0;
+        }
+
+        form label {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        form input, form textarea {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 10px;
+            border: 1px solid #ced4da;
+            border-radius: 4px;
+        }
+
+        form button {
+            background-color: #28a745;
+            border: none;
+            color: white;
+            padding: 10px 20px;
+            font-size: 16px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        form button:hover {
+            background-color: #218838;
+        }
+
+        /* Mensajes de Éxito */
+        .success-message {
+            background-color: #d4edda;
+            color: #155724;
+            padding: 10px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Lista de Platos</h1>
+        <a href="{{ route('platos.create') }}" class="button">
+            <i class="fas fa-arrow-left"></i> Agregar Nuevo Plato
+        </a>
+        <table>
+            <thead>
+                <tr>
+                    <th>Nombre</th>
+                    <th>Descripción</th>
+                    <th>Precio</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach($platos as $plato)
+                    <tr>
+                        <td>{{ $plato->nombre }}</td>
+                        <td>{{ $plato->descripcion }}</td>
+                        <td>{{ $plato->precio }}</td>
+                        <td class="actions">
+                            <a href="{{ route('platos.show', $plato->id) }}" class="button view">Ver</a>
+                            <a href="{{ route('platos.edit', $plato->id) }}" class="button edit">Editar</a>
+                            <form action="{{ route('platos.destroy', $plato->id) }}" method="POST" style="display:inline;">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="button delete">Eliminar</button>
+                            </form>
+                        </td>
+                    </tr>
+                @endforeach
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>
+
+
